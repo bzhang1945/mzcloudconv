@@ -4,9 +4,21 @@ import time
 import data_parser
 import predictor
 from google.cloud import storage
+import threading
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
+
+compounds_loaded = threading.Event()
+
+def load_compounds():
+    predictor.load_compounds()
+    compounds_loaded.set()
+
+# Start background loading thread
+compounds_loader = threading.Thread(target=load_compounds)
+compounds_loader.start()
+
 
 # GCS
 credentials = 'credentials.json'
@@ -35,6 +47,7 @@ def gcs_download(blob):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        compounds_loaded.wait()
         uploaded_file = request.files['file']
         if uploaded_file and uploaded_file.filename.split('.')[-1] == 'mzML':
             upload_name = gcs_upload(uploaded_file)
