@@ -77,6 +77,7 @@ def parse_to_xml(file_path, output_path):
 
     return instrument_params
 
+
 def prettify(elem):
     """
     XML indentation helper function

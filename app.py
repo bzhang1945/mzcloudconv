@@ -9,13 +9,13 @@ import threading
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 
+# Background compound loading thread
 compounds_loaded = threading.Event()
 
 def load_compounds():
     predictor.load_compounds()
     compounds_loaded.set()
 
-# Start background loading thread
 compounds_loader = threading.Thread(target=load_compounds)
 compounds_loader.start()
 
@@ -44,6 +44,7 @@ def gcs_download(blob):
         print(err)
 
 
+# Endpoints
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
