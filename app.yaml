@@ -11,4 +11,4 @@ handlers:
     script: auto
 
 env_variables:
-  SECRET_KEY: 'b8e4fa1f06f3535a48f911bf611378a70c541211274f90c4de57687a29b94271'
+  SECRET_KEY: 'REPLACE ME HERE'
