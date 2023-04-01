@@ -3,7 +3,6 @@ import pymzml
 from data_parser import load_massbank
 import numpy as np
 
-compounds = {}
 
 def find_peaks(mzml_file, min_mz_diff=0.1, top_n=10):
     """
@@ -111,17 +110,13 @@ def cosine_similarity(peaks1, peaks2, mz_tolerance=0.01, intensity_threshold=0.1
     return shared_intensity / ((intensity1_squared * intensity2_squared) ** 0.5)
 
 
-def load_compounds():
-    global compounds
-    massbank_dir = "MassBank_NIST.msp"
-    compounds = load_massbank(massbank_dir)
-
-
 def main(mzml):
-    global compounds
-    peaks = find_peaks(mzml)
+    mzml_file = mzml
+    massbank_dir = "MassBank_NIST.msp"
+    peaks = find_peaks(mzml_file)
     # for peak in peaks:
     #     print(f'{peak[0]} {peak[1]}')
+    compounds = load_massbank(massbank_dir)
     return find_best_match(peaks, compounds)  
 
 
