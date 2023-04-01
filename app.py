@@ -32,6 +32,7 @@ def gcs_download(blob):
         print(err)
 
 
+# Endpoints
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':

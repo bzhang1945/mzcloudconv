@@ -3,7 +3,6 @@ import pymzml
 from data_parser import load_massbank
 import numpy as np
 
-
 def find_peaks(mzml_file, min_mz_diff=0.1, top_n=10):
     """
     Given the path of an mzml file, return a list of the top_n peaks.
