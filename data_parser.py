@@ -17,23 +17,21 @@ def load_massbank(filename):
             if not line:
                 continue
 
-            if line.startswith("Name:"):
+            key, value = line.split(":", 1)
+            key = key.strip()
+            value = value.strip()
+
+            if key == "Name":
                 if current_compound:
                     compounds[current_compound["Name"]] = current_compound
-                current_compound = {"Name": line.split("Name:")[1].strip()}
+                current_compound = {"Name": value}
+            elif key == "Num Peaks":
+                num_peaks = int(value)
+                current_compound[key] = num_peaks
+                peaks = [tuple(map(float, file.readline().strip().split())) for _ in range(num_peaks)]
+                current_compound["Peaks"] = peaks
             else:
-                key, value = line.split(":", 1)
-                key = key.strip()
-                value = value.strip()
-                
-                if key == "Num Peaks":
-                    current_compound[key] = int(value)
-                    peaks = []
-                    for _ in range(current_compound[key]):
-                        peaks.append(tuple(map(float, file.readline().strip().split())))
-                    current_compound["Peaks"] = peaks
-                else:
-                    current_compound[key] = value
+                current_compound[key] = value
 
     if current_compound:
         compounds[current_compound["Name"]] = current_compound
