@@ -1,0 +1,14 @@
+runtime: python38
+
+entrypoint: gunicorn -b :$PORT --timeout 180 app:app
+
+instance_class: F2
+
+handlers:
+  - url: /static
+    static_dir: static
+  - url: /.*
+    script: auto
+
+env_variables:
+  SECRET_KEY: 'b8e4fa1f06f3535a48f911bf611378a70c541211274f90c4de57687a29b94271'

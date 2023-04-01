@@ -1,0 +1,6 @@
+Flask==2.1.1
+pyteomics
+lxml
+pymzml
+google-cloud-storage
+gunicorn==20.1.0

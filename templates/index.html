@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Conversion</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <h1>Upload mzML File</h1>
+    <p>Welcome to the mzML file converter! Please upload your mzML file to view compound and instrument information.</p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/" method="POST" enctype="multipart/form-data" onsubmit="showLoader();">
+        <label for="file" class="custom-file-upload">
+            Choose File
+        </label>
+        <input type="file" name="file" id="file" accept=".mzml">
+        <span id="file-name"></span>
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+
+    <script>
+        document.getElementById("file").addEventListener("change", function(e) {
+            const fileName = e.target.files[0].name;
+            const fileLabel = document.getElementById("file-name");
+            fileLabel.innerText = fileName;
+        });
+
+        function showLoader() {
+            const loader = document.getElementById("loader");
+            loader.style.display = "block";
+        }
+    </script>
+
+    <div class="loader" id="loader"></div>
+</body>
+</html>

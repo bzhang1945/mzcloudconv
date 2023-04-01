@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    <h2>Predicted Compound</h2>
+    <table>
+        <thead>
+          <tr>
+            <th>Compound Name</th>
+            <th>Formula</th>
+            <th>Molecular Weight</th>
+            <th>Relative Intensity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ results[0] }}</td>
+            <td>{{ results[1] }}</td>
+            <td>{{ results[2] }}</td>
+            <td>{{ results[3] }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Instrument Information</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Instrument</th>
+            <th>Serial Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ results[4] }}</td>
+            <td>{{ results[5] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="{{ url_for('download') }}">Download parsed XML of this file</a>
+      <br>
+    <a href="{{ url_for('index') }}">Upload another file</a>
+</body>
+</html>

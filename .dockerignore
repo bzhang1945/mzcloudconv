@@ -1,0 +1,14 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+*.egg
+*.egg-info
+*.eggs
+*.git
+*.hg
+*.svn
+venv
+
+.gcloudignore
